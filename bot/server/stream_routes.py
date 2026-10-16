@@ -25,8 +25,8 @@ client_cache = {}
 routes = web.RouteTableDef()
 db = Database()
 
-@routes.get('/api/logo')
-@routes.get('/logo.png')
+@routes.get('/api/logo', allow_head=True)
+@routes.get('/logo.png', allow_head=True)
 async def logo_handler(request):
     return web.FileResponse('bot/server/static/xibflix.png')
 
@@ -358,8 +358,10 @@ async def stream_handler_watch(request: web.Request):
 @routes.get('/{chat_id}/{encoded_name}', allow_head=True)
 async def stream_handler(request: web.Request):
     try:
-        chat_id = request.match_info['chat_id']
-        chat_id = f"-100{chat_id}"
+        raw_chat = request.match_info['chat_id']
+        if not raw_chat.lstrip('-').isdigit():
+            raise web.HTTPNotFound()
+        chat_id = f"-100{raw_chat}" if not raw_chat.startswith('-100') else raw_chat
         message_id = request.query.get('id')
         #name = request.match_info['encoded_name']
         secure_hash = request.query.get('hash')
