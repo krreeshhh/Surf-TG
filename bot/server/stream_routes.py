@@ -28,6 +28,10 @@ db = Database()
 @routes.get('/api/logo', allow_head=True)
 @routes.get('/logo.png', allow_head=True)
 async def logo_handler(request):
+    return web.FileResponse('bot/server/static/xibflix_wordmark.png')
+
+@routes.get('/api/poster', allow_head=True)
+async def poster_handler(request):
     return web.FileResponse('bot/server/static/xibflix.png')
 
 
