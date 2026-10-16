@@ -1,3 +1,4 @@
+import certifi
 from pymongo import DESCENDING, MongoClient
 from bson import ObjectId
 from bot.config import Telegram
@@ -7,7 +8,7 @@ import re
 class Database:
     def __init__(self):
         MONGODB_URI = Telegram.DATABASE_URL
-        self.mongo_client = MongoClient(MONGODB_URI)
+        self.mongo_client = MongoClient(MONGODB_URI, tlsCAFile=certifi.where())
         self.db = self.mongo_client["surftg"]
         self.collection = self.db["playlist"]
         self.config = self.db["config"]
