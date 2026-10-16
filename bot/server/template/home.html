@@ -5,97 +5,395 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/weebzone/weebzone/data/Surf-TG/src/ico2.png" type="image/x-icon">
-    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/weebzone/weebzone/data/Surf-TG/src/ico2.png"
-        type="image/x-icon">
-    <title>Surf-TG: Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://bootswatch.com/5/<!-- Theme -->/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/weebzone/weebzone/data/Surf-TG/src/ico2.png" type="image/x-icon">
+    <title>Surf-TG — The Infinite Digital Shelf</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/weebzone/weebzone/data/Surf-TG/js/SurfTG.js"></script>
     <script disable-devtool-auto src='https://cdn.jsdelivr.net/npm/disable-devtool'></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --color-netflix-red: #e50914;
+            --color-feature-card-gradient: #1d153f;
+            --gradient-feature-card-gradient: linear-gradient(149deg, #192247, #210e17);
+            --color-deep-space: #000000;
+            --color-graphite: #2d2d2d;
+            --color-charcoal: #414141;
+            --color-slate: #5a5a5a;
+            --color-ash: #808080;
+            --color-silver: #b3b3b3;
+            --color-chalk-white: #ffffff;
+            --font-netflix-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --radius-cards: 16px;
+            --radius-inputs: 4px;
+            --radius-buttons: 4px;
+            --page-max-width: 1280px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-deep-space);
+            color: var(--color-chalk-white);
+            font-family: var(--font-netflix-sans);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-charcoal);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-slate);
+        }
+
+        /* Netflix Header */
+        .netflix-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 16px 36px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: var(--color-netflix-red) !important;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-netflix-header {
+            background: rgba(0, 0, 0, 0.4);
+            color: var(--color-chalk-white);
+            border: 1px solid var(--color-ash);
+            border-radius: var(--radius-buttons);
+            padding: 6px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-netflix-header:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--color-chalk-white);
+            border-color: var(--color-chalk-white);
+        }
+
+        .btn-netflix-red {
+            background: var(--color-netflix-red);
+            color: var(--color-chalk-white);
+            border: none;
+            border-radius: var(--radius-buttons);
+            padding: 6px 16px;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .btn-netflix-red:hover {
+            background: #c10712;
+            color: var(--color-chalk-white);
+        }
+
+        /* Hero Theatrical Section */
+        .hero-section {
+            position: relative;
+            padding: 64px 36px 48px;
+            max-width: var(--page-max-width);
+            margin: 0 auto;
+            width: 100%;
+            text-align: left;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(229, 9, 20, 0.15);
+            border: 1px solid var(--color-netflix-red);
+            color: var(--color-netflix-red);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+
+        .hero-headline {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            color: var(--color-chalk-white);
+            margin-bottom: 16px;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            line-height: 1.5;
+            color: var(--color-silver);
+            max-width: 680px;
+            margin-bottom: 28px;
+        }
+
+        .hero-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 24px;
+        }
+
+        /* Shelf / Section Styling */
+        .content-container {
+            max-width: var(--page-max-width);
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 36px 48px;
+            flex: 1;
+        }
+
+        .shelf-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 36px 0 16px;
+        }
+
+        .shelf-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-chalk-white);
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .shelf-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 22px;
+            background: var(--color-netflix-red);
+            border-radius: 2px;
+        }
+
+        /* Netflix Cards (Overrides Bootstrap Cards injected by helper) */
+        .card {
+            background: var(--gradient-feature-card-gradient) !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: var(--radius-cards) !important;
+            overflow: hidden;
+            box-shadow: none !important;
+            transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), border-color 0.25s ease !important;
+        }
+
+        .card:hover {
+            transform: scale(1.04) translateY(-4px) !important;
+            border-color: rgba(229, 9, 20, 0.6) !important;
+        }
+
+        .card .card-body {
+            background: transparent !important;
+            padding: 12px 14px !important;
+        }
+
+        .card .card-title {
+            font-size: 14px !important;
+            font-weight: 700 !important;
+            color: var(--color-chalk-white) !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 6px;
+        }
+
+        .card .badge {
+            font-size: 11px;
+            font-weight: 500;
+            border-radius: 4px;
+            padding: 3px 8px;
+            background: rgba(0, 0, 0, 0.6) !important;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--color-silver) !important;
+        }
+
+        .card .badge.bg-warning, .card .badge.bg-info {
+            background: rgba(229, 9, 20, 0.15) !important;
+            border-color: rgba(229, 9, 20, 0.5) !important;
+            color: var(--color-chalk-white) !important;
+        }
+
+        .profile-card {
+            padding-top: 16px;
+            text-align: center;
+        }
+
+        .profile-card .img-container {
+            border: 2px solid rgba(255, 255, 255, 0.1) !important;
+            background: rgba(0, 0, 0, 0.5) !important;
+        }
+
+        /* Modal Overrides */
+        .modal-content {
+            background-color: #141414 !important;
+            border: 1px solid var(--color-charcoal) !important;
+            border-radius: var(--radius-cards) !important;
+            color: var(--color-chalk-white) !important;
+            padding: 12px;
+        }
+
+        .modal-body label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-silver);
+            margin-bottom: 6px;
+        }
+
+        .form-control, .form-select {
+            background-color: rgba(22, 22, 22, 0.8) !important;
+            border: 1px solid var(--color-slate) !important;
+            color: var(--color-chalk-white) !important;
+            border-radius: var(--radius-inputs) !important;
+            padding: 10px 14px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--color-chalk-white) !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .btn-primary {
+            background-color: var(--color-netflix-red) !important;
+            border-color: var(--color-netflix-red) !important;
+            border-radius: var(--radius-buttons) !important;
+            font-weight: 700;
+        }
+
+        .btn-primary:hover {
+            background-color: #c10712 !important;
+            border-color: #c10712 !important;
+        }
+
+        .btn-secondary {
+            background-color: var(--color-graphite) !important;
+            border-color: var(--color-slate) !important;
+            border-radius: var(--radius-buttons) !important;
+            color: var(--color-chalk-white) !important;
+        }
+
+        .btn-danger {
+            background-color: #8c060d !important;
+            border-color: #8c060d !important;
+            border-radius: var(--radius-buttons) !important;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 32px 36px;
+            font-size: 13px;
+            color: var(--color-silver);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--color-deep-space);
+            text-align: center;
+        }
+
+        .footer a {
+            color: var(--color-silver);
+            transition: color 0.2s ease;
+        }
+
+        .footer a:hover {
+            color: var(--color-chalk-white);
+        }
+
+        @media (max-width: 768px) {
+            .netflix-navbar {
+                padding: 14px 20px;
+            }
+            .hero-section {
+                padding: 36px 20px 24px;
+            }
+            .hero-headline {
+                font-size: 32px;
+            }
+            .content-container {
+                padding: 0 20px 36px;
+            }
+            .footer {
+                padding: 24px 20px;
+            }
+        }
+    </style>
 </head>
-<style>
-    a {
-        text-decoration: none;
-    }
-
-    ::-webkit-scrollbar {
-        width: 5px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: #888;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-
-    html {
-        position: relative;
-        min-height: 100%;
-    }
-
-    body {
-        margin-bottom: 60px;
-    }
-
-    .footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 60px;
-    }
-
-    .col {
-        transition: all 0.3s;
-    }
-
-    .col:hover {
-        transform: scale(1.05);
-    }
-</style>
 
 <body>
+    <!-- Edit Config Modal -->
     <div class="admin-only modal fade" id="editConfigModal" aria-labelledby="editConfigModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title font-weight-bold">System Configuration</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body">
                     <form action="/config" method="post">
-                        <label for="edit_channel">Auth Channel:</label>
-                        <input type="text" class="form-control" id="edit_channel" name="channel" value=""><br>
-                        <label for="edit_theme">Theme:</label>
-                        <input type="text" class="form-control" id="edit_theme" name="theme" value="<!-- Theme -->"><br>
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary me-2"
-                                onclick="submitEditConfigForm()">Submit</button>
-                            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="admin-only modal fade" id="createFolderModal" aria-labelledby="createFolderModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <form action="/create" method="post">
-                        <label for="folderName" class="form-label">Folder Name</label>
-                        <input type="text" class="form-control" id="folderName" name="folderName"
-                            placeholder="Enter folder name">
-                        <label for="thumbnail" class="form-label">Thumbnail</label>
-                        <input type="text" class="form-control" id="thumbnail" name="thumbnail"
-                            placeholder="Thumbnail url"><br>
-                        <input type="hidden" id="parent_dir" name="parent_dir" readonly>
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Create</button>
+                        <label for="edit_channel">Auth Channel IDs:</label>
+                        <input type="text" class="form-control mb-3" id="edit_channel" name="channel" value="">
+                        <label for="edit_theme">Theme Token:</label>
+                        <input type="text" class="form-control mb-4" id="edit_theme" name="theme" value="<!-- Theme -->">
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" onclick="submitEditConfigForm()">Save Changes</button>
                         </div>
                     </form>
                 </div>
@@ -103,22 +401,53 @@
         </div>
     </div>
 
+    <!-- Create Folder Modal -->
+    <div class="admin-only modal fade" id="createFolderModal" aria-labelledby="createFolderModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title font-weight-bold">Create Virtual Folder</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/create" method="post">
+                        <label for="folderName">Folder Name</label>
+                        <input type="text" class="form-control mb-3" id="folderName" name="folderName" placeholder="e.g. Cinema Classics" required>
+                        <label for="thumbnail">Thumbnail Poster URL</label>
+                        <input type="text" class="form-control mb-4" id="thumbnail" name="thumbnail" placeholder="https://image.tmdb.org/...">
+                        <input type="hidden" id="parent_dir" name="parent_dir" readonly>
+                        <div class="d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Create Folder</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Folder Modal -->
     <div class="admin-only modal fade" id="editFolderModal" aria-labelledby="editFolderModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title font-weight-bold">Manage Folder</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body">
                     <form action="/edit" method="post">
                         <input type="hidden" id="edit_folder_id" name="folder_id" value="">
                         <input type="hidden" id="edit_parent" name="parent" value="">
                         <label for="edit_folderName">Folder Name:</label>
-                        <input type="text" class="form-control" id="edit_folderName" name="folderName" value=""><br>
-                        <label for="edit_thumbnail">Thumbnail:</label>
-                        <input type="text" class="form-control" id="edit_thumbnail" name="thumbnail" value=""><br>
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary me-2"
-                                onclick="submitEditForm()">Submit</button>
-                            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
+                        <input type="text" class="form-control mb-3" id="edit_folderName" name="folderName" value="">
+                        <label for="edit_thumbnail">Thumbnail URL:</label>
+                        <input type="text" class="form-control mb-4" id="edit_thumbnail" name="thumbnail" value="">
+                        <div class="d-flex justify-content-between align-items-center">
                             <button type="button" class="btn btn-danger" onclick="deleteItem()">Delete</button>
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" onclick="submitEditForm()">Update</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -126,85 +455,98 @@
         </div>
     </div>
 
-    <nav class="navbar navbar-expand-lg bg-primary mb-3 p-1" data-bs-theme="dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <img src="https://cdn.jsdelivr.net/gh/weebzone/weebzone/data/Surf-TG/src/logo%20(2).png" alt="Logo"
-                    height="40">
-            </a>
-            <div class="d-flex">
-                <button type="button" class="admin-only btn btn-primary me-1 btn-sm" data-bs-toggle="modal"
-                    data-bs-target="#editConfigModal"><i
-                        class="bi bi-pencil"></i></button>
-                <form action="/reload" method="get" role="reload" class="admin-only ">
-                    <button type="submit" class="btn btn-primary me-1 btn-sm" name="chatId" value="home">
-                        <i class="bi bi-arrow-clockwise"></i>
-                    </button>
-                </form>
-                <form id="signoutForm" action="/logout" method="post" class="d-flex" role="logout">
-                    <button type="submit" class="btn btn-secondary btn-sm"><i class="bi bi-box-arrow-left"></i>
-                        Logout</button>
-                </form>
+    <!-- Netflix Navigation Bar -->
+    <header class="netflix-navbar">
+        <a class="brand-logo" href="/">
+            SURF-TG
+        </a>
+        <div class="header-actions">
+            <button type="button" class="admin-only btn-netflix-header" data-bs-toggle="modal" data-bs-target="#editConfigModal" title="Settings">
+                <i class="bi bi-gear"></i> Config
+            </button>
+            <form action="/reload" method="get" role="reload" class="admin-only m-0">
+                <button type="submit" class="btn-netflix-header" name="chatId" value="home" title="Reload Source">
+                    <i class="bi bi-arrow-clockwise"></i>
+                </button>
+            </form>
+            <form id="signoutForm" action="/logout" method="post" class="m-0" role="logout">
+                <button type="submit" class="btn-netflix-header"><i class="bi bi-box-arrow-left"></i> Sign Out</button>
+            </form>
+        </div>
+    </header>
+
+    <!-- Theatrical Hero -->
+    <section class="hero-section">
+        <span class="hero-badge">Cinematic Library</span>
+        <h1 class="hero-headline">The Infinite Digital Shelf</h1>
+        <p class="hero-description">
+            Stream high-bitrate media and download content straight from Telegram cloud storage directly to your browser.
+        </p>
+        <div class="hero-bar">
+            <div class="shelf-title" style="margin: 0;">Indexed Content</div>
+            <button type="button" class="admin-only btn-netflix-red" data-bs-toggle="modal" data-bs-target="#createFolderModal" onclick="createPopupForm(event)">
+                <i class="bi bi-folder-plus"></i> New Folder
+            </button>
+        </div>
+    </section>
+
+    <!-- Content Carousels & Grids -->
+    <main class="content-container">
+        <!-- Channels Section -->
+        <div class="hide-channel">
+            <div class="shelf-header">
+                <div class="shelf-title">Channels</div>
+            </div>
+            <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
+                <!-- Print -->
             </div>
         </div>
-    </nav>
-    <div class="container d-flex align-items-center justify-content-center">
-        <div class="card mx-auto text-center">
-            <div class="card-header">Available Sources</div>
+
+        <!-- Playlists / Virtual Folders Section -->
+        <div>
+            <div class="shelf-header">
+                <div class="shelf-title">Playlists & Collections</div>
+            </div>
+            <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
+                <!-- Playlist -->
+            </div>
         </div>
-        <button type="button" class="admin-only btn btn-secondary btn-sm" data-bs-toggle="modal"
-            data-bs-target="#createFolderModal" onclick="createPopupForm(event)">Create Folder</button>
-    </div>
-    <div class="container py-2">
-        <!-- Channel grid  -->
-        <div class="hide-channel row row-cols-2 row-cols-md-4 row-cols-lg-6 g-2">
-            <!-- Channel card  -->
-            <!-- Print -->
-        </div>
-        <!-- Folder grid  -->
-        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-2">
-            <!-- Folder card  -->
-            <!-- Playlist -->
-        </div>
-    </div>
-    <footer class="footer mt-auto py-3 text-muted text-center" style="color: white;">
-        <div class="container d-flex justify-content-center align-items-center" style="width: 100%; padding: 0 10px;">
-            <p class="float-end">
-            <p>Made with <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="red"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                </svg> by <a href="https://github.com/weebzone" target="_blank">Karan Adhikari</a><br>
-                &copy; 2024 <a href="https://github.com/weebzone/Surf-TG" target="_blank">Surf-TG</a>. All Rights
-                Reserved.
-            </p>
+    </main>
+
+    <footer class="footer">
+        <div>
+            Surf-TG Digital Shelf &bull; Theatrical Streaming Experience &bull;
+            &copy; 2026 <a href="https://github.com/weebzone/Surf-TG" target="_blank" rel="noreferrer">Surf-TG</a>
         </div>
     </footer>
-</body>
-<script>
-    function setDefaultChannelValue() {
-        const channelCards = document.querySelectorAll('.channel-card');
 
-        const cids = Array.from(channelCards).map(card => {
-            const link = card.querySelector('a');
-            console.log(link)
-            if (link) {
-                const cid = link.getAttribute('href').split('/').pop();
-                return `-100${cid}`;
+    <script>
+        function setDefaultChannelValue() {
+            const channelCards = document.querySelectorAll('.channel-card');
+            const cids = Array.from(channelCards).map(card => {
+                const link = card.querySelector('a');
+                if (link) {
+                    const cid = link.getAttribute('href').split('/').pop();
+                    return `-100${cid}`;
+                }
+                return null;
+            }).filter(cid => cid !== null);
+
+            const channelInput = document.getElementById('edit_channel');
+            if (channelInput) {
+                channelInput.value = cids.join(', ');
             }
-            return null;
-        }).filter(cid => cid !== null);
+        }
 
-        const channelInput = document.getElementById('edit_channel');
-        channelInput.value = cids.join(', ');
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        const editConfigModal = document.getElementById('editConfigModal');
-        editConfigModal.addEventListener('show.bs.modal', function () {
-            setDefaultChannelValue();
+        document.addEventListener('DOMContentLoaded', function () {
+            const editConfigModal = document.getElementById('editConfigModal');
+            if (editConfigModal) {
+                editConfigModal.addEventListener('show.bs.modal', function () {
+                    setDefaultChannelValue();
+                });
+            }
         });
-    });
+    </script>
+</body>
 
-</script>
 </html>

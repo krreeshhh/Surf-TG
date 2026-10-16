@@ -19,7 +19,7 @@ async def posts_chat(channels):
     phtml = """
             <div class="col channel-card">
                 <a href="/channel/{cid}">
-                    <div class="card profile-card text-white bg-primary mb-2">
+                    <div class="card profile-card text-white mb-2">
                     
                         <div class="img-container text-center"
                             style="width: 145px; height: 145px; display: inline-block; overflow: hidden; position: relative; border-radius: 50%; margin: auto;">
@@ -45,7 +45,7 @@ async def post_playlist(playlists):
     dhtml = """
     <div class="col">
 
-        <div class="card profile-card text-white bg-primary mb-2">
+        <div class="card profile-card text-white mb-2">
             <a href="" onclick="openEditPopupForm(event, '{img}', '{ctype}', '{cid}', '{title}')"
                 class="admin-only position-absolute top-0 end-0 m-2" data-bs-toggle="modal" data-bs-target="#editFolderModal"
                 style="z-index: 1;"><i class="bi bi-pencil-square"></i>
@@ -77,7 +77,7 @@ async def posts_db_file(posts):
     phtml = """
     <div class="col">
 
-        <div class="card text-white bg-primary mb-2">
+        <div class="card text-white mb-2">
             <a href=""
                 onclick="openPostEditPopupForm(event, '{img}', '{type}', '{size}', '{title}', '{cid}', '{ctype}')"
                 class="admin-only position-absolute top-0 end-0 m-2" data-bs-toggle="modal" data-bs-target="#editModal"><i

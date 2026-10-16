@@ -15,14 +15,14 @@ db = Database()
 admin_block = """
                     <style>
                         .admin-only {
-                            display: none;
+                            display: none !important;
                         }
                     </style>"""
 
 hide_channel = """
                     <style>
                         .hide-channel {
-                            display: none;
+                            display: none !important;
                         }
                     </style>"""
 
