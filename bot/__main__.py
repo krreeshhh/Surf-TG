@@ -13,7 +13,7 @@ from bot.telegram.clients import initialize_clients
 loop = get_event_loop()
 
 async def start_services():
-    LOGGER.info(f'Initializing Surf-TG v-{__version__}')
+    LOGGER.info(f'Initializing Xibflix v-{__version__}')
     await asleep(1.2)
     
     await StreamBot.start()
@@ -40,7 +40,7 @@ async def start_services():
     await server.setup()
     await web.TCPSite(server, '0.0.0.0', Telegram.PORT).start()
 
-    LOGGER.info("Surf-TG Started Revolving !")
+    LOGGER.info("Xibflix Started Revolving !")
     await idle()
 
 async def stop_clients():
