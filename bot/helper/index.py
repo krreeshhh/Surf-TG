@@ -59,22 +59,24 @@ async def get_files(chat_id, page=1):
 async def posts_file(posts, chat_id):
     phtml = """
             <div class="col">
-                
-                    <div class="card text-white mb-3">
-                        <input type="checkbox" class="admin-only form-check-input position-absolute top-0 end-0 m-2"
-                            onchange="checkSendButton()" id="selectCheckbox"
-                            data-id="{id}|{hash}|{title}|{size}|{type}|{img}">
-                        <img src="https://cdn.jsdelivr.net/gh/weebzone/weebzone/data/Surf-TG/src/loading.gif" class="lzy_img card-img-top rounded-top"
-                            data-src="{img}" alt="{title}">
-                        <a href="/watch/{chat_id}?id={id}&hash={hash}">
-                        <div class="card-body p-1">
-                            <h6 class="card-title">{title}</h6>
-                            <span class="badge bg-warning">{type}</span>
-                            <span class="badge bg-info">{size}</span>
+                <div class="card netflix-shelf-card mb-3">
+                    <input type="checkbox" class="admin-only form-check-input position-absolute top-0 end-0 m-2"
+                        onchange="checkSendButton()" id="selectCheckbox"
+                        data-id="{id}|{hash}|{title}|{size}|{type}|{img}">
+                    <a href="/watch/{chat_id}?id={id}&hash={hash}" class="shelf-card-link">
+                        <div class="card-poster-wrapper">
+                            <img src="https://cdn.jsdelivr.net/gh/weebzone/weebzone/data/Surf-TG/src/loading.gif" class="card-poster-img lzy_img"
+                                data-src="{img}" alt="{title}">
+                            <div class="card-badge-overlay">
+                                <span class="badge-shelf-tag">{type}</span>
+                                <span class="badge-shelf-tag highlight">{size}</span>
+                            </div>
                         </div>
-                        </a>
-                    </div>
-                
+                        <div class="card-info-footer">
+                            <h6 class="card-shelf-title" title="{title}">{title}</h6>
+                        </div>
+                    </a>
+                </div>
             </div>
 """
     return ''.join(phtml.format(chat_id=str(chat_id).replace("-100", ""), id=post["msg_id"], img=f"/api/thumb/{chat_id}?id={post['msg_id']}", title=post["title"], hash=post["hash"], size=post['size'], type=post['type']) for post in posts)

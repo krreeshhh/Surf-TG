@@ -25,6 +25,11 @@ client_cache = {}
 routes = web.RouteTableDef()
 db = Database()
 
+@routes.get('/api/logo')
+@routes.get('/logo.png')
+async def logo_handler(request):
+    return web.FileResponse('bot/server/static/xibflix.png')
+
 
 @routes.get('/login')
 async def login_form(request):

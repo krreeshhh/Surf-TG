@@ -3,7 +3,7 @@ from bot import LOGGER
 from bot.telegram import StreamBot
 
 image_cache = {}
-path = ospath.join('bot/server/static', 'thumbnail.jpg')
+path = ospath.join('bot/server/static', 'xibflix.png')
 
 async def get_image(chat_id, message_id):
     global image_cache
@@ -22,4 +22,4 @@ async def get_image(chat_id, message_id):
         return img
     except Exception as e:
         LOGGER.error(f"Generate Img Error: {e}")
-        return
+        return path

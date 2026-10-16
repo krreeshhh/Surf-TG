@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://cdn.jsdelivr.net/gh/weebzone/weebzone/data/Surf-TG/src/ico2.png" type="image/x-icon">
-    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/weebzone/weebzone/data/Surf-TG/src/ico2.png" type="image/x-icon">
+    <link rel="icon" href="/api/logo" type="image/png">
+    <link rel="shortcut icon" href="/api/logo" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <title>Xibflix — <!-- Filename --></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/weebzone/weebzone/data/Surf-TG/css/plyr.css">
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,20 +18,16 @@
     <style>
         :root {
             --color-netflix-red: #e50914;
-            --color-feature-card-gradient: #1d153f;
-            --gradient-feature-card-gradient: linear-gradient(149deg, #192247, #210e17);
             --color-deep-space: #000000;
-            --color-graphite: #2d2d2d;
-            --color-charcoal: #414141;
+            --color-graphite: #181818;
+            --color-charcoal: #2a2a2a;
             --color-slate: #5a5a5a;
             --color-ash: #808080;
             --color-silver: #b3b3b3;
             --color-chalk-white: #ffffff;
-            --font-netflix-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            --radius-cards: 16px;
-            --radius-inputs: 4px;
+            --font-netflix: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --radius-cards: 12px;
             --radius-buttons: 4px;
-            --page-max-width: 1100px;
             --plyr-color-main: #e50914;
             --plyr-video-background: #000000;
             --plyr-control-radius: 4px;
@@ -46,7 +42,7 @@
             padding: 0;
             background-color: var(--color-deep-space);
             color: var(--color-chalk-white);
-            font-family: var(--font-netflix-sans);
+            font-family: var(--font-netflix);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -72,27 +68,51 @@
             background: var(--color-slate);
         }
 
-        /* Navbar */
+        /* Netflix Header */
         .netflix-navbar {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.88);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 16px 36px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.75) 75%, transparent 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 14px 36px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .brand-logo {
-            font-size: 26px;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-            color: var(--color-netflix-red) !important;
-            text-transform: uppercase;
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .btn-back {
+            color: var(--color-chalk-white);
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 6px 14px;
+            border-radius: var(--radius-buttons);
+            transition: all 0.2s ease;
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.18);
+            color: var(--color-chalk-white);
+        }
+
+        .brand-logo-img {
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            display: block;
         }
 
         .btn-netflix-header {
@@ -101,7 +121,7 @@
             border: 1px solid var(--color-ash);
             border-radius: var(--radius-buttons);
             padding: 6px 16px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             display: inline-flex;
             align-items: center;
@@ -115,68 +135,74 @@
             border-color: var(--color-chalk-white);
         }
 
-        /* Theater Container */
-        .theater-wrapper {
-            max-width: var(--page-max-width);
-            margin: 32px auto 48px;
-            width: 100%;
-            padding: 0 24px;
+        /* Theater Stage */
+        .theater-stage {
+            max-width: 1320px;
+            width: 94%;
+            margin: 20px auto 40px;
             flex: 1;
         }
 
-        .video-player-container {
+        .player-viewport {
             width: 100%;
             background: #000000;
             border-radius: var(--radius-cards);
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+            position: relative;
         }
 
         .plyr {
             border-radius: var(--radius-cards);
-            max-height: 70vh;
+            max-height: 74vh;
+            width: 100%;
         }
 
         .plyr__control--overlaid {
             background: rgba(229, 9, 20, 0.9) !important;
-            padding: 18px !important;
+            padding: 22px !important;
+            border-radius: 50% !important;
         }
 
-        .plyr--video .plyr__control.plyr__tab-focus,
-        .plyr--video .plyr__control:hover,
-        .plyr--video .plyr__control[aria-expanded=true] {
-            background: var(--color-netflix-red) !important;
-        }
-
-        /* File Information Card */
-        .feature-info-card {
-            background: var(--gradient-feature-card-gradient);
+        /* Cinema Details Bar */
+        .cinema-details {
+            background: linear-gradient(149deg, #192247, #210e17);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: var(--radius-cards);
             padding: 24px 28px;
-            margin-bottom: 24px;
+            margin-top: 18px;
         }
 
-        .file-title {
+        .title-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .video-title {
             font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
+            font-weight: 800;
+            line-height: 1.3;
             color: var(--color-chalk-white);
-            margin-bottom: 12px;
+            margin: 0;
             word-break: break-word;
+            flex: 1;
         }
 
-        .file-meta-row {
+        .tags-row {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
-        .meta-pill {
-            font-size: 13px;
-            font-weight: 500;
+        .tag-pill {
+            font-size: 12px;
+            font-weight: 600;
             border-radius: 4px;
             padding: 4px 10px;
             background: rgba(0, 0, 0, 0.6);
@@ -187,52 +213,38 @@
             gap: 6px;
         }
 
-        .meta-pill.highlight {
-            background: rgba(229, 9, 20, 0.15);
-            border-color: rgba(229, 9, 20, 0.5);
+        .tag-pill.accent {
+            background: rgba(229, 9, 20, 0.2);
+            border-color: var(--color-netflix-red);
+            color: #ff6b72;
+        }
+
+        .tag-pill.hd {
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            border-color: rgba(255, 255, 255, 0.4);
             color: var(--color-chalk-white);
         }
 
-        /* Theatrical Actions Grid */
-        .actions-shelf {
+        /* Action Toolbar */
+        .action-toolbar {
             display: flex;
             align-items: center;
+            gap: 10px;
             flex-wrap: wrap;
-            gap: 12px;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .btn-cta-netflix {
+        .btn-netflix-download {
             background: var(--color-netflix-red);
             color: var(--color-chalk-white);
             border: none;
             border-radius: var(--radius-buttons);
-            padding: 12px 28px;
-            font-size: 15px;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: background 0.2s ease, transform 0.1s ease;
-        }
-
-        .btn-cta-netflix:hover {
-            background: #c10712;
-            color: var(--color-chalk-white);
-        }
-
-        .btn-cta-netflix:active {
-            transform: scale(0.98);
-        }
-
-        .btn-action-netflix {
-            background: rgba(22, 22, 22, 0.7);
-            color: var(--color-chalk-white);
-            border: 1px solid var(--color-slate);
-            border-radius: var(--radius-buttons);
-            padding: 12px 20px;
+            padding: 10px 24px;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -240,15 +252,37 @@
             transition: all 0.2s ease;
         }
 
-        .btn-action-netflix:hover {
-            background: var(--color-charcoal);
+        .btn-netflix-download:hover {
+            background: #c10712;
+            color: var(--color-chalk-white);
+            transform: translateY(-1px);
+        }
+
+        .btn-netflix-chip {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--color-chalk-white);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: var(--radius-buttons);
+            padding: 10px 18px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-netflix-chip:hover {
+            background: rgba(255, 255, 255, 0.2);
             border-color: var(--color-chalk-white);
             color: var(--color-chalk-white);
+            transform: translateY(-1px);
         }
 
         /* Footer */
         .footer {
-            padding: 32px 36px;
+            padding: 28px 36px;
             font-size: 13px;
             color: var(--color-silver);
             border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -267,22 +301,26 @@
 
         @media (max-width: 768px) {
             .netflix-navbar {
-                padding: 14px 20px;
+                padding: 12px 18px;
             }
-            .theater-wrapper {
-                padding: 0 16px;
-                margin-top: 16px;
+            .theater-stage {
+                width: 100%;
+                padding: 0 12px;
+                margin-top: 10px;
             }
-            .file-title {
-                font-size: 20px;
+            .cinema-details {
+                padding: 18px 16px;
             }
-            .actions-shelf {
+            .video-title {
+                font-size: 18px;
+            }
+            .action-toolbar {
                 flex-direction: column;
                 align-items: stretch;
             }
-            .btn-cta-netflix, .btn-action-netflix {
-                justify-content: center;
+            .btn-netflix-download, .btn-netflix-chip {
                 width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -291,50 +329,57 @@
 <body>
     <!-- Netflix Navigation -->
     <header class="netflix-navbar">
-        <a class="brand-logo" href="/">
-            XIBFLIX
-        </a>
+        <div class="nav-left">
+            <a href="/" class="btn-back">
+                <i class="bi bi-chevron-left"></i> Home
+            </a>
+            <a href="/">
+                <img src="/api/logo" alt="XIBFLIX" class="brand-logo-img">
+            </a>
+        </div>
         <form id="signoutForm" action="/logout" method="post" class="m-0" role="logout">
             <button type="submit" class="btn-netflix-header"><i class="bi bi-box-arrow-left"></i> Sign Out</button>
         </form>
     </header>
 
-    <!-- Theater Mode Stage -->
-    <main class="theater-wrapper">
-        <div class="video-player-container">
+    <!-- Theatrical Stage -->
+    <main class="theater-stage">
+        <div class="player-viewport">
             <video controls crossorigin playsinline data-poster="<!-- Poster -->" id="player">
                 <source src="#" type="video/mp4" />
             </video>
         </div>
 
-        <div class="feature-info-card">
-            <h1 class="file-title"><!-- Filename --></h1>
-            <div class="file-meta-row">
-                <span class="meta-pill highlight"><i class="bi bi-play-circle-fill"></i> Stream Ready</span>
-                <span class="meta-pill"><i class="bi bi-hdd-fill"></i> <!-- Size --></span>
-                <span class="meta-pill"><i class="bi bi-shield-check"></i> Direct Telegram MTProto</span>
+        <div class="cinema-details">
+            <div class="title-row">
+                <h1 class="video-title"><!-- Filename --></h1>
+                <div class="tags-row">
+                    <span class="tag-pill hd">HD</span>
+                    <span class="tag-pill accent"><i class="bi bi-broadcast"></i> Ultra Stream</span>
+                    <span class="tag-pill"><i class="bi bi-hdd-fill"></i> <!-- Size --></span>
+                </div>
             </div>
-        </div>
 
-        <div class="actions-shelf">
-            <button onclick="download()" class="btn-cta-netflix">
-                <i class="bi bi-download"></i> Download Video
-            </button>
-            <button onclick="vlc_player()" class="btn-action-netflix">
-                <i class="bi bi-cone-striped"></i> VLC Player
-            </button>
-            <button onclick="mx_player()" class="btn-action-netflix">
-                <i class="bi bi-play-btn-fill"></i> MX Player
-            </button>
-            <button onclick="km_player()" class="btn-action-netflix">
-                <i class="bi bi-collection-play"></i> KM Player
-            </button>
-            <button onclick="get_file()" class="btn-action-netflix">
-                <i class="bi bi-telegram"></i> Bot Direct Link
-            </button>
-            <button onclick="copyUrl()" class="btn-action-netflix">
-                <i class="bi bi-clipboard"></i> Copy Stream URL
-            </button>
+            <div class="action-toolbar">
+                <button onclick="download()" class="btn-netflix-download">
+                    <i class="bi bi-download"></i> Download Video
+                </button>
+                <button onclick="vlc_player()" class="btn-netflix-chip">
+                    <i class="bi bi-cone-striped"></i> VLC Player
+                </button>
+                <button onclick="mx_player()" class="btn-netflix-chip">
+                    <i class="bi bi-play-circle-fill"></i> MX Player
+                </button>
+                <button onclick="km_player()" class="btn-netflix-chip">
+                    <i class="bi bi-collection-play-fill"></i> KM Player
+                </button>
+                <button onclick="get_file()" class="btn-netflix-chip">
+                    <i class="bi bi-telegram"></i> Telegram Bot
+                </button>
+                <button onclick="copyUrl()" class="btn-netflix-chip">
+                    <i class="bi bi-link-45deg"></i> Copy Link
+                </button>
+            </div>
         </div>
     </main>
 

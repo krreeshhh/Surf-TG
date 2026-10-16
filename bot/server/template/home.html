@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://cdn.jsdelivr.net/gh/weebzone/weebzone/data/Surf-TG/src/ico2.png" type="image/x-icon">
-    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/weebzone/weebzone/data/Surf-TG/src/ico2.png" type="image/x-icon">
+    <link rel="icon" href="/api/logo" type="image/png">
+    <link rel="shortcut icon" href="/api/logo" type="image/png">
     <title>Xibflix — The Infinite Digital Shelf</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -18,20 +18,18 @@
     <style>
         :root {
             --color-netflix-red: #e50914;
-            --color-feature-card-gradient: #1d153f;
-            --gradient-feature-card-gradient: linear-gradient(149deg, #192247, #210e17);
+            --color-feature-gradient: linear-gradient(149deg, #192247, #210e17);
             --color-deep-space: #000000;
-            --color-graphite: #2d2d2d;
-            --color-charcoal: #414141;
-            --color-slate: #5a5a5a;
+            --color-graphite: #141414;
+            --color-charcoal: #262626;
+            --color-slate: #4d4d4d;
             --color-ash: #808080;
             --color-silver: #b3b3b3;
             --color-chalk-white: #ffffff;
-            --font-netflix-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            --radius-cards: 16px;
-            --radius-inputs: 4px;
+            --font-netflix: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --radius-cards: 10px;
             --radius-buttons: 4px;
-            --page-max-width: 1280px;
+            --page-max-width: 1400px;
         }
 
         * {
@@ -43,7 +41,7 @@
             padding: 0;
             background-color: var(--color-deep-space);
             color: var(--color-chalk-white);
-            font-family: var(--font-netflix-sans);
+            font-family: var(--font-netflix);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -74,40 +72,41 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.88);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.75) 85%, transparent 100%);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 16px 36px;
+            padding: 14px 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .brand-logo {
-            font-size: 26px;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-            color: var(--color-netflix-red) !important;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .brand-logo-img {
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.2s ease;
+        }
+
+        .brand-logo-img:hover {
+            transform: scale(1.03);
         }
 
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .btn-netflix-header {
             background: rgba(0, 0, 0, 0.4);
             color: var(--color-chalk-white);
-            border: 1px solid var(--color-ash);
+            border: 1px solid var(--color-slate);
             border-radius: var(--radius-buttons);
-            padding: 6px 16px;
-            font-size: 14px;
+            padding: 6px 14px;
+            font-size: 13px;
             font-weight: 500;
             display: inline-flex;
             align-items: center;
@@ -116,7 +115,7 @@
         }
 
         .btn-netflix-header:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.12);
             color: var(--color-chalk-white);
             border-color: var(--color-chalk-white);
         }
@@ -127,11 +126,12 @@
             border: none;
             border-radius: var(--radius-buttons);
             padding: 6px 16px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            cursor: pointer;
             transition: background 0.2s ease;
         }
 
@@ -140,153 +140,205 @@
             color: var(--color-chalk-white);
         }
 
-        /* Hero Theatrical Section */
-        .hero-section {
-            position: relative;
-            padding: 64px 36px 48px;
+        /* Compact Netflix Hero */
+        .hero-banner {
             max-width: var(--page-max-width);
             margin: 0 auto;
             width: 100%;
-            text-align: left;
+            padding: 28px 40px 16px;
         }
 
-        .hero-badge {
-            display: inline-block;
-            background: rgba(229, 9, 20, 0.15);
-            border: 1px solid var(--color-netflix-red);
-            color: var(--color-netflix-red);
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            padding: 4px 12px;
-            border-radius: 4px;
-            margin-bottom: 16px;
-        }
-
-        .hero-headline {
-            font-size: 48px;
-            font-weight: 900;
-            line-height: 1.1;
-            letter-spacing: -1px;
-            color: var(--color-chalk-white);
-            margin-bottom: 16px;
-        }
-
-        .hero-description {
-            font-size: 18px;
-            line-height: 1.5;
-            color: var(--color-silver);
-            max-width: 680px;
-            margin-bottom: 28px;
-        }
-
-        .hero-bar {
+        .hero-card {
+            background: radial-gradient(circle at 15% 50%, rgba(229, 9, 20, 0.12) 0%, rgba(25, 34, 71, 0.25) 50%, rgba(0, 0, 0, 0.6) 100%), #0d0d0d;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 28px 36px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 24px;
+            gap: 20px;
         }
 
-        /* Shelf / Section Styling */
-        .content-container {
+        .hero-title {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: var(--color-chalk-white);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hero-title .pill {
+            font-size: 11px;
+            font-weight: 700;
+            background: var(--color-netflix-red);
+            color: #ffffff;
+            padding: 3px 8px;
+            border-radius: 3px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            color: var(--color-silver);
+            margin: 0;
+            max-width: 650px;
+        }
+
+        /* Content Shelves */
+        .shelves-container {
             max-width: var(--page-max-width);
             margin: 0 auto;
             width: 100%;
-            padding: 0 36px 48px;
+            padding: 10px 40px 48px;
             flex: 1;
         }
 
-        .shelf-header {
+        .shelf-row-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin: 36px 0 16px;
+            margin: 28px 0 14px;
         }
 
-        .shelf-title {
-            font-size: 24px;
+        .shelf-heading {
+            font-size: 20px;
             font-weight: 700;
             color: var(--color-chalk-white);
             letter-spacing: -0.3px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            margin: 0;
         }
 
-        .shelf-title::before {
+        .shelf-heading::before {
             content: '';
             display: inline-block;
             width: 4px;
-            height: 22px;
+            height: 18px;
             background: var(--color-netflix-red);
             border-radius: 2px;
         }
 
-        /* Netflix Cards (Overrides Bootstrap Cards injected by helper) */
-        .card {
-            background: var(--gradient-feature-card-gradient) !important;
+        /* Netflix Shelf Card (Neat & Compact) */
+        .netflix-shelf-card {
+            background: #111111 !important;
             border: 1px solid rgba(255, 255, 255, 0.08) !important;
             border-radius: var(--radius-cards) !important;
             overflow: hidden;
-            box-shadow: none !important;
-            transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), border-color 0.25s ease !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+            transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), border-color 0.25s ease, box-shadow 0.25s ease !important;
+            position: relative;
+            cursor: pointer;
         }
 
-        .card:hover {
-            transform: scale(1.04) translateY(-4px) !important;
-            border-color: rgba(229, 9, 20, 0.6) !important;
+        .netflix-shelf-card:hover {
+            transform: scale(1.05) translateY(-3px) !important;
+            border-color: rgba(229, 9, 20, 0.7) !important;
+            box-shadow: 0 8px 24px rgba(229, 9, 20, 0.2) !important;
+            z-index: 10;
         }
 
-        .card .card-body {
-            background: transparent !important;
-            padding: 12px 14px !important;
+        .shelf-card-link {
+            display: block;
+            color: inherit;
         }
 
-        .card .card-title {
-            font-size: 14px !important;
-            font-weight: 700 !important;
-            color: var(--color-chalk-white) !important;
+        .card-poster-wrapper {
+            width: 100%;
+            height: 140px;
+            background: #000000;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-poster-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .netflix-shelf-card:hover .card-poster-img {
+            transform: scale(1.06);
+        }
+
+        .card-badge-overlay {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            z-index: 2;
+        }
+
+        .badge-shelf-tag {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 3px;
+            background: rgba(0, 0, 0, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--color-silver);
+            backdrop-filter: blur(4px);
+        }
+
+        .badge-shelf-tag.highlight {
+            background: rgba(229, 9, 20, 0.25);
+            border-color: var(--color-netflix-red);
+            color: #ffffff;
+        }
+
+        .card-info-footer {
+            padding: 10px 12px;
+            background: #111111;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .card-shelf-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--color-chalk-white);
+            margin: 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            margin-bottom: 6px;
         }
 
-        .card .badge {
-            font-size: 11px;
-            font-weight: 500;
-            border-radius: 4px;
-            padding: 3px 8px;
-            background: rgba(0, 0, 0, 0.6) !important;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: var(--color-silver) !important;
+        .edit-card-btn {
+            z-index: 5;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--color-chalk-white);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.2s ease;
         }
 
-        .card .badge.bg-warning, .card .badge.bg-info {
-            background: rgba(229, 9, 20, 0.15) !important;
-            border-color: rgba(229, 9, 20, 0.5) !important;
-            color: var(--color-chalk-white) !important;
+        .edit-card-btn:hover {
+            background: var(--color-netflix-red);
+            border-color: var(--color-netflix-red);
+            color: #ffffff;
         }
 
-        .profile-card {
-            padding-top: 16px;
-            text-align: center;
-        }
-
-        .profile-card .img-container {
-            border: 2px solid rgba(255, 255, 255, 0.1) !important;
-            background: rgba(0, 0, 0, 0.5) !important;
-        }
-
-        /* Modal Overrides */
+        /* Modals */
         .modal-content {
             background-color: #141414 !important;
             border: 1px solid var(--color-charcoal) !important;
-            border-radius: var(--radius-cards) !important;
+            border-radius: 12px !important;
             color: var(--color-chalk-white) !important;
             padding: 12px;
         }
@@ -302,8 +354,9 @@
             background-color: rgba(22, 22, 22, 0.8) !important;
             border: 1px solid var(--color-slate) !important;
             color: var(--color-chalk-white) !important;
-            border-radius: var(--radius-inputs) !important;
+            border-radius: var(--radius-buttons) !important;
             padding: 10px 14px;
+            font-size: 14px;
         }
 
         .form-control:focus, .form-select:focus {
@@ -321,11 +374,10 @@
 
         .btn-primary:hover {
             background-color: #c10712 !important;
-            border-color: #c10712 !important;
         }
 
         .btn-secondary {
-            background-color: var(--color-graphite) !important;
+            background-color: #242424 !important;
             border-color: var(--color-slate) !important;
             border-radius: var(--radius-buttons) !important;
             color: var(--color-chalk-white) !important;
@@ -339,7 +391,7 @@
 
         /* Footer */
         .footer {
-            padding: 32px 36px;
+            padding: 28px 40px;
             font-size: 13px;
             color: var(--color-silver);
             border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -358,19 +410,22 @@
 
         @media (max-width: 768px) {
             .netflix-navbar {
-                padding: 14px 20px;
+                padding: 12px 20px;
             }
-            .hero-section {
-                padding: 36px 20px 24px;
+            .hero-banner {
+                padding: 18px 20px 10px;
             }
-            .hero-headline {
-                font-size: 32px;
+            .hero-card {
+                padding: 20px;
             }
-            .content-container {
+            .hero-title {
+                font-size: 22px;
+            }
+            .shelves-container {
                 padding: 0 20px 36px;
             }
-            .footer {
-                padding: 24px 20px;
+            .card-poster-wrapper {
+                height: 110px;
             }
         }
     </style>
@@ -406,19 +461,19 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-title font-weight-bold">Create Virtual Folder</h5>
+                    <h5 class="modal-title font-weight-bold">Create Collection</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="/create" method="post">
-                        <label for="folderName">Folder Name</label>
-                        <input type="text" class="form-control mb-3" id="folderName" name="folderName" placeholder="e.g. Cinema Classics" required>
-                        <label for="thumbnail">Thumbnail Poster URL</label>
-                        <input type="text" class="form-control mb-4" id="thumbnail" name="thumbnail" placeholder="https://image.tmdb.org/...">
+                        <label for="folderName">Collection Name</label>
+                        <input type="text" class="form-control mb-3" id="folderName" name="folderName" placeholder="e.g. Action Movies" required>
+                        <label for="thumbnail">Custom Poster URL (optional)</label>
+                        <input type="text" class="form-control mb-4" id="thumbnail" name="thumbnail" placeholder="Defaults to Xibflix logo if left empty">
                         <input type="hidden" id="parent_dir" name="parent_dir" readonly>
                         <div class="d-flex justify-content-end gap-2">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Create Folder</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
                         </div>
                     </form>
                 </div>
@@ -431,16 +486,16 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-title font-weight-bold">Manage Folder</h5>
+                    <h5 class="modal-title font-weight-bold">Manage Collection</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="/edit" method="post">
                         <input type="hidden" id="edit_folder_id" name="folder_id" value="">
                         <input type="hidden" id="edit_parent" name="parent" value="">
-                        <label for="edit_folderName">Folder Name:</label>
+                        <label for="edit_folderName">Collection Name:</label>
                         <input type="text" class="form-control mb-3" id="edit_folderName" name="folderName" value="">
-                        <label for="edit_thumbnail">Thumbnail URL:</label>
+                        <label for="edit_thumbnail">Poster URL:</label>
                         <input type="text" class="form-control mb-4" id="edit_thumbnail" name="thumbnail" value="">
                         <div class="d-flex justify-content-between align-items-center">
                             <button type="button" class="btn btn-danger" onclick="deleteItem()">Delete</button>
@@ -457,8 +512,8 @@
 
     <!-- Netflix Navigation Bar -->
     <header class="netflix-navbar">
-        <a class="brand-logo" href="/">
-            XIBFLIX
+        <a href="/">
+            <img src="/api/logo" alt="XIBFLIX" class="brand-logo-img">
         </a>
         <div class="header-actions">
             <button type="button" class="admin-only btn-netflix-header" data-bs-toggle="modal" data-bs-target="#editConfigModal" title="Settings">
@@ -475,40 +530,43 @@
         </div>
     </header>
 
-    <!-- Theatrical Hero -->
-    <section class="hero-section">
-        <span class="hero-badge">Cinematic Library</span>
-        <h1 class="hero-headline">The Infinite Digital Shelf</h1>
-        <p class="hero-description">
-            Stream high-bitrate media and download content straight from Telegram cloud storage directly to your browser.
-        </p>
-        <div class="hero-bar">
-            <div class="shelf-title" style="margin: 0;">Indexed Content</div>
+    <!-- Compact Theatrical Hero Banner -->
+    <section class="hero-banner">
+        <div class="hero-card">
+            <div>
+                <div class="hero-title">
+                    Digital Media Shelf
+                    <span class="pill">Fast Stream</span>
+                </div>
+                <p class="hero-subtitle">
+                    Stream high-bitrate media and browse indexed Telegram channels with direct cloud delivery.
+                </p>
+            </div>
             <button type="button" class="admin-only btn-netflix-red" data-bs-toggle="modal" data-bs-target="#createFolderModal" onclick="createPopupForm(event)">
-                <i class="bi bi-folder-plus"></i> New Folder
+                <i class="bi bi-folder-plus"></i> New Collection
             </button>
         </div>
     </section>
 
-    <!-- Content Carousels & Grids -->
-    <main class="content-container">
-        <!-- Channels Section -->
-        <div class="hide-channel">
-            <div class="shelf-header">
-                <div class="shelf-title">Channels</div>
-            </div>
-            <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
-                <!-- Print -->
-            </div>
-        </div>
-
-        <!-- Playlists / Virtual Folders Section -->
+    <!-- Content Shelves -->
+    <main class="shelves-container">
+        <!-- Playlists & Collections (Defaulting to XIBFLIX Art) -->
         <div>
-            <div class="shelf-header">
-                <div class="shelf-title">Playlists & Collections</div>
+            <div class="shelf-row-header">
+                <h2 class="shelf-heading">Playlists & Collections</h2>
             </div>
             <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
                 <!-- Playlist -->
+            </div>
+        </div>
+
+        <!-- Telegram Channels Shelf -->
+        <div class="hide-channel">
+            <div class="shelf-row-header">
+                <h2 class="shelf-heading">Indexed Channels</h2>
+            </div>
+            <div class="row row-cols-2 row-cols-md-4 row-cols-lg-6 g-3">
+                <!-- Print -->
             </div>
         </div>
     </main>
